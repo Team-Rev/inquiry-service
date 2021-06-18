@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import rev.team.INQUIRY_SERVICE.domain.entity.InquiryReply;
 
 @Repository
-public interface InquiryCommentRepository extends JpaRepository<InquiryReply, Long> {
+public interface InquiryReplyRepository extends JpaRepository<InquiryReply, Long> {
 }
