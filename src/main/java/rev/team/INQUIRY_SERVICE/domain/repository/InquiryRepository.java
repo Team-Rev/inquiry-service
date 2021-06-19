@@ -10,5 +10,5 @@ import rev.team.INQUIRY_SERVICE.domain.entity.Inquiry;
 public interface InquiryRepository extends JpaRepository<Inquiry, Long> {
 
 
-    public Page<Inquiry> findByUserId(String userId, Pageable pageable);
+    Page<Inquiry> findMainPostByUserId(boolean checkInquiry, String userId, Pageable pageable);
 }

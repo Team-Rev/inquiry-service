@@ -25,7 +25,7 @@ public class InquiryViewService {
     }
 
     public List<InquiryListRes> getInquiryList(String userId, Pageable pageable) {
-        Page<Inquiry> inquiries = inquiryRepository.findByUserId(userId, pageable);
+        Page<Inquiry> inquiries = inquiryRepository.findMainPostByUserId(true, userId, pageable);
         List<InquiryListRes> inquiryList = new LinkedList<>();
 
         for (Inquiry inquiry : inquiries) {

@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity
-@Builder
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Entity
 public class Inquiry {
 
     @Id
@@ -43,5 +43,4 @@ public class Inquiry {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL) // n:1 관계
     @JoinColumn(name = "inquiryReplyId") // 참조키
     private InquiryReply inquiryReplyId; // FK
-
 }
