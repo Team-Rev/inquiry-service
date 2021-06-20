@@ -5,11 +5,10 @@ import lombok.Getter;
 
 @Builder
 @Getter
-public class NewReplyReq {
+public class EditReplyReq {
 
-    private Long inquiry_id;
-
-    private String userId;
+    private Long Id;
 
     private String content;
+
 }
