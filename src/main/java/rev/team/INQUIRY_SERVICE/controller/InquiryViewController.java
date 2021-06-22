@@ -24,8 +24,8 @@ public class InquiryViewController {
 
     // TODO: 메인 문의 글 가져오기 (목록 보여주기 용)
     @GetMapping("/inquiryList")
-    public List<InquiryListRes> getInquiryList(@RequestBody String userId, Pageable pageable) {
-        return inquiryViewService.getInquiryList(userId, pageable);
+    public List<InquiryListRes> getMainInquiryList(@RequestBody String userId, Pageable pageable) {
+        return inquiryViewService.getMainInquiryList(userId, pageable);
     }
 
     // TODO: 상세 문의 글 가져오기

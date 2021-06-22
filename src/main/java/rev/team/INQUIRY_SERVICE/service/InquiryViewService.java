@@ -26,7 +26,7 @@ public class InquiryViewService {
         this.inquiryReplyRepository = inquiryReplyRepository;
     }
 
-    public List<InquiryListRes> getInquiryList(String userId, Pageable pageable) {
+    public List<InquiryListRes> getMainInquiryList(String userId, Pageable pageable) {
         Page<Inquiry> inquiries = inquiryRepository.findParentsByUserId(userId, pageable);
         List<InquiryListRes> inquiryList = new LinkedList<>();
 
@@ -77,7 +77,7 @@ public class InquiryViewService {
         List<Inquiry> childInquiries = inquiryRepository.findChildById(id);
         List<DetailInquiryReq> childDetailInquiries = new LinkedList<>();
 
-        for(Inquiry child : childInquiries) {
+        for (Inquiry child : childInquiries) {
             DetailInquiryReq detailInquiryReq = DetailInquiryReq.builder()
                     .userId(child.getUserId())
                     .content(child.getContent())

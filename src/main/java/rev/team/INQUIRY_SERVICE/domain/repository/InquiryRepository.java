@@ -25,7 +25,7 @@ public interface InquiryRepository extends JpaRepository<Inquiry, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE inquiry SET title = title, content = content WHERE (inquiry_id = :id);", nativeQuery = true)
+    @Query(value = "UPDATE inquiry SET title = :title, content = :content WHERE (inquiry_id = :id);", nativeQuery = true)
     void updatePost(Long id, String title, String content);
 
     @Modifying
