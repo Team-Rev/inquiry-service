@@ -28,7 +28,7 @@ public class InquiryManipulateService {
                 .userId(newInquiryReq.getUserId())
                 .title(newInquiryReq.getTitle())
                 .content(newInquiryReq.getContent())
-                .checkInquiry(newInquiryReq.isCheckInquiry())
+                .parentId(newInquiryReq.getParentId())
                 .build());
 
         return "CREATE SUCCESS";
@@ -45,13 +45,18 @@ public class InquiryManipulateService {
     }
 
     public String update(EditInquiryReq editReq) {
-        inquiryRepository.update(editReq.getId(), editReq.getTitle(), editReq.getContent());
+        inquiryRepository.updatePost(editReq.getId(), editReq.getTitle(), editReq.getContent());
         return "EDIT SUCCESS";
     }
 
 
     public String update(EditReplyReq editReplyReq) {
-        inquiryReplyRepository.update(editReplyReq.getId(), editReplyReq.getContent());
+        inquiryReplyRepository.updatePost(editReplyReq.getId(), editReplyReq.getContent());
         return "EDIT SUCCESS";
+    }
+
+    public String update(Long inquiryId) {
+        inquiryRepository.updateProcessing(inquiryId);
+        return "UPDATE SUCCESS";
     }
 }

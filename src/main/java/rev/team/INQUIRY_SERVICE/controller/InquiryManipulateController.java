@@ -1,10 +1,7 @@
 package rev.team.INQUIRY_SERVICE.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import rev.team.INQUIRY_SERVICE.domain.request.EditInquiryReq;
 import rev.team.INQUIRY_SERVICE.domain.request.EditReplyReq;
 import rev.team.INQUIRY_SERVICE.domain.request.NewInquiryReq;
@@ -49,4 +46,11 @@ public class InquiryManipulateController {
     // 메인 문의면 이어지는 애들 다 삭제, 서브 문의면 그것만 삭제
 
     // TODO: 답변 글 삭제
+
+    // TODO: 문의 해결 여부 변경
+    @PatchMapping("/updateProcessing")
+    public String updateProcessing(@RequestParam Long inquiryId) {
+        return inquiryManipulateService.update(inquiryId);
+    }
+
 }

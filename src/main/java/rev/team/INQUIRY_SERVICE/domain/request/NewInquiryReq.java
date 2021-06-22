@@ -13,5 +13,6 @@ public class NewInquiryReq {
 
     private String title;
 
-    private boolean checkInquiry;
+    // 0: 메인 문의, 1~n: 서브 문의
+    private Long parentId;
 }

@@ -13,5 +13,8 @@ public interface InquiryReplyRepository extends JpaRepository<InquiryReply, Long
     @Modifying
     @Transactional
     @Query(value = "UPDATE inquiry_reply SET content = content WHERE (inquiry_id = :id);", nativeQuery = true)
-    void update(Long id, String content);
+    void updatePost(Long id, String content);
+
+    @Query(value = "SELECT * FROM inquiry_reply WHERE (inquiry_reply_id = :id);", nativeQuery = true)
+    InquiryReply findReplyById(InquiryReply id);
 }
