@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 public class EditInquiryReq {
 
-    private Long Id;
+    private Long inquiryId;
 
     private String title;
 

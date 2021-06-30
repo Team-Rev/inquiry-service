@@ -7,9 +7,9 @@ import lombok.Getter;
 @Getter
 public class NewReplyReq {
 
-    private Long inquiry_id;
+    private Long inquiryId;
 
-    private String userId;
+    private String username;
 
     private String content;
 }

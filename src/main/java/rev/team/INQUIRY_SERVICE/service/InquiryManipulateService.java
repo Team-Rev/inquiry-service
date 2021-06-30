@@ -25,7 +25,7 @@ public class InquiryManipulateService {
 
     public String insert(NewInquiryReq newInquiryReq) {
         inquiryRepository.save(Inquiry.builder()
-                .userId(newInquiryReq.getUserId())
+                .username(newInquiryReq.getUsername())
                 .title(newInquiryReq.getTitle())
                 .content(newInquiryReq.getContent())
                 .parentId(newInquiryReq.getParentId())
@@ -36,22 +36,22 @@ public class InquiryManipulateService {
 
     public String insert(NewReplyReq newReplyReq) {
         inquiryReplyRepository.save(InquiryReply.builder()
-                .userId(newReplyReq.getUserId())
+                .username(newReplyReq.getUsername())
                 .content(newReplyReq.getContent())
-                .inquiryReplyId(newReplyReq.getInquiry_id())
+                .inquiryReplyId(newReplyReq.getInquiryId())
                 .build());
 
         return "CREATE SUCCESS";
     }
 
     public String update(EditInquiryReq editReq) {
-        inquiryRepository.updatePost(editReq.getId(), editReq.getTitle(), editReq.getContent());
+        inquiryRepository.updatePost(editReq.getInquiryId(), editReq.getTitle(), editReq.getContent());
         return "EDIT SUCCESS";
     }
 
 
     public String update(EditReplyReq editReplyReq) {
-        inquiryReplyRepository.updatePost(editReplyReq.getId(), editReplyReq.getContent());
+        inquiryReplyRepository.updatePost(editReplyReq.getInquiryReplyId(), editReplyReq.getContent());
         return "EDIT SUCCESS";
     }
 

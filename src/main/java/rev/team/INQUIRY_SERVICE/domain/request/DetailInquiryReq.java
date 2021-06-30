@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 public class DetailInquiryReq {
 
-    private String userId;
+    private String username;
 
     private String title;
 

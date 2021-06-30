@@ -7,11 +7,11 @@ import lombok.Getter;
 @Getter
 public class NewInquiryReq {
 
-    private String userId;
-
-    private String content;
+    private String username;
 
     private String title;
+
+    private String content;
 
     // 0: 메인 문의, 1~n: 서브 문의
     private Long parentId;

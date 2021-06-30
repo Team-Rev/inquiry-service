@@ -19,7 +19,7 @@ public class Inquiry {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long inquiryId;
 
-    private String userId;
+    private String username;
 
     private String title;
 

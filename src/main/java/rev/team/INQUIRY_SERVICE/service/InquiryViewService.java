@@ -53,7 +53,7 @@ public class InquiryViewService {
 
         // 메인 문의
         DetailInquiryReq detailInquiry = DetailInquiryReq.builder()
-                .userId(mainInquiry.getUserId())
+                .username(mainInquiry.getUsername())
                 .title(mainInquiry.getTitle())
                 .content(mainInquiry.getContent())
                 .postDate(mainInquiry.getPostDate())
@@ -64,7 +64,7 @@ public class InquiryViewService {
         // 메인 문의 답변
         InquiryReply mainReply = inquiryReplyRepository.findReplyById(mainInquiry.getInquiryReplyId());
         detailInquiry = detailInquiry.builder()
-                .userId(mainReply.getUserId())
+                .username(mainReply.getUsername())
                 .content(mainReply.getContent())
                 .postDate(mainReply.getPostDate())
                 .build();
@@ -79,7 +79,7 @@ public class InquiryViewService {
 
         for (Inquiry child : childInquiries) {
             DetailInquiryReq detailInquiryReq = DetailInquiryReq.builder()
-                    .userId(child.getUserId())
+                    .username(child.getUsername())
                     .content(child.getContent())
                     .postDate(child.getPostDate())
                     .inquiryReplyId(child.getInquiryReplyId())
@@ -92,7 +92,7 @@ public class InquiryViewService {
 
             // 서브 문의
             detailInquiryReq = DetailInquiryReq.builder()
-                    .userId(detailInquiryReq.getUserId())
+                    .username(detailInquiryReq.getUsername())
                     .content(detailInquiryReq.getContent())
                     .postDate(detailInquiryReq.getPostDate())
                     .build();
@@ -101,7 +101,7 @@ public class InquiryViewService {
             // 서브 문의 답변
             InquiryReply inquiryReply = inquiryReplyRepository.findReplyById(detailInquiryReq.getInquiryReplyId());
             detailInquiryReq = DetailInquiryReq.builder()
-                    .userId(inquiryReply.getUserId())
+                    .username(inquiryReply.getUsername())
                     .content(inquiryReply.getContent())
                     .postDate(inquiryReply.getPostDate())
                     .build();

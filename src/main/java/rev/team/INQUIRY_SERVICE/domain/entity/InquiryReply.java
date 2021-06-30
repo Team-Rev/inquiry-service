@@ -19,7 +19,7 @@ public class InquiryReply {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long inquiryReplyId;
 
-    private String userId;
+    private String username;
 
     @Column(columnDefinition = "TEXT")
     private String content;

@@ -24,14 +24,13 @@ public class InquiryViewController {
 
     // TODO: 메인 문의 글 가져오기 (목록 보여주기 용)
     @GetMapping("/inquiryList")
-    public List<InquiryListRes> getMainInquiryList(@RequestBody String userId, Pageable pageable) {
-        return inquiryViewService.getMainInquiryList(userId, pageable);
+    public List<InquiryListRes> getMainInquiryList(@RequestBody String username, Pageable pageable) {
+        return inquiryViewService.getMainInquiryList(username, pageable);
     }
 
     // TODO: 상세 문의 글 가져오기
     @GetMapping("/inquiryDetail")
-    public List<DetailInquiryReq> getInquiryDetail(@PathVariable Long id) {
-        return inquiryViewService.getInquiryDetail(id);
+    public List<DetailInquiryReq> getInquiryDetail(@PathVariable Long InquiryId) {
+        return inquiryViewService.getInquiryDetail(InquiryId);
     }
-
 }
