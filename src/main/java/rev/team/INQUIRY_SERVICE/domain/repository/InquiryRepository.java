@@ -23,6 +23,9 @@ public interface InquiryRepository extends JpaRepository<Inquiry, Long> {
     @Query(value = "SELECT * FROM inquiry WHERE (parent_id = :id) ORDER BY post_date;", nativeQuery = true)
     List<Inquiry> findChildById(Long id);
 
+    @Query(value = "SELECT * FROM inquiry WHERE (parent_id = :id);", nativeQuery = true)
+    List<Inquiry> findInquiryById(Long id);
+
     @Modifying
     @Transactional
     @Query(value = "UPDATE inquiry SET title = :title, content = :content WHERE (inquiry_id = :id);", nativeQuery = true)
@@ -32,5 +35,8 @@ public interface InquiryRepository extends JpaRepository<Inquiry, Long> {
     @Transactional
     @Query(value = "UPDATE inquiry SET processing = true WHERE (inquiry_id = :id);", nativeQuery = true)
     void updateProcessing(Long id);
+
+    @Query(value = "SELECT parent_id FROM inquiry WHERE (inquiry_id = :id);", nativeQuery = true)
+    int isParentId(Long id);
 
 }

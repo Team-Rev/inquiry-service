@@ -11,6 +11,9 @@ import rev.team.INQUIRY_SERVICE.domain.request.EditReplyReq;
 import rev.team.INQUIRY_SERVICE.domain.request.NewInquiryReq;
 import rev.team.INQUIRY_SERVICE.domain.request.NewReplyReq;
 
+import java.util.List;
+
+
 @Service
 public class InquiryManipulateService {
 
@@ -55,8 +58,34 @@ public class InquiryManipulateService {
         return "EDIT SUCCESS";
     }
 
-    public String update(Long inquiryId) {
+    public String updateProcessing(Long inquiryId) {
         inquiryRepository.updateProcessing(inquiryId);
         return "UPDATE SUCCESS";
+    }
+
+    // 메인 문의면 이어지는 애들 다 삭제, 서브 문의면 그것만 삭제
+    public String deleteInquiry(Long id) {
+
+        int checkParentId = inquiryRepository.isParentId(id); // 메인 문의인지, 서브 문의인지 체크
+
+        if (checkParentId == 0) { // 메인
+            List<Inquiry> deleteInquiries = inquiryRepository.findInquiryById(id);
+
+            for (Inquiry inquiry : deleteInquiries) {
+                inquiryReplyRepository.delete(inquiry.getInquiryReplyId()); // 1-문의글의 답변글 삭제
+                inquiryRepository.deleteById(inquiry.getInquiryId()); // 2-문의글 삭제
+            }
+
+        } else { // 서브
+            inquiryRepository.deleteById(id);
+        }
+
+        return "DELETE SUCCESS";
+    }
+
+    public String deleteReply(Long id) {
+        inquiryReplyRepository.deleteById(id);
+
+        return "DELETE SUCCESS";
     }
 }

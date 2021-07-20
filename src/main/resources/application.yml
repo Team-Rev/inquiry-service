@@ -30,4 +30,4 @@ eureka:
   instance:
   #  hostname: 10.178.0.3
   #  hostname: 121.124.72.50
-    hostname: 34.64.73.179
+    hostname: 210.101.247.125

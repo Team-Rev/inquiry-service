@@ -43,14 +43,21 @@ public class InquiryManipulateController {
     }
 
     // TODO: 문의 글 삭제
-    // 메인 문의면 이어지는 애들 다 삭제, 서브 문의면 그것만 삭제
+    @DeleteMapping("/deleteInquiry")
+    public String deleteInquiry(@RequestParam Long id) {
+        return inquiryManipulateService.deleteInquiry(id);
+    }
 
     // TODO: 답변 글 삭제
+    @DeleteMapping("/deleteReply")
+    public String deleteReply(@RequestParam Long id) {
+        return inquiryManipulateService.deleteReply(id);
+    }
 
     // TODO: 문의 해결 여부 변경
     @PatchMapping("/updateProcessing")
     public String updateProcessing(@RequestParam Long inquiryId) {
-        return inquiryManipulateService.update(inquiryId);
+        return inquiryManipulateService.updateProcessing(inquiryId);
     }
 
 }
