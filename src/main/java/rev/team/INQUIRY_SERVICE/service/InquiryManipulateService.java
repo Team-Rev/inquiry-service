@@ -11,6 +11,7 @@ import rev.team.INQUIRY_SERVICE.domain.request.EditReplyReq;
 import rev.team.INQUIRY_SERVICE.domain.request.NewInquiryReq;
 import rev.team.INQUIRY_SERVICE.domain.request.NewReplyReq;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -32,30 +33,48 @@ public class InquiryManipulateService {
                 .title(newInquiryReq.getTitle())
                 .content(newInquiryReq.getContent())
                 .parentId(newInquiryReq.getParentId())
+                .postDate(LocalDateTime.now())
                 .build());
 
         return "CREATE SUCCESS";
     }
 
     public String insert(NewReplyReq newReplyReq) {
+        // 답변 글 생성
         inquiryReplyRepository.save(InquiryReply.builder()
                 .username(newReplyReq.getUsername())
                 .content(newReplyReq.getContent())
-                .inquiryReplyId(newReplyReq.getInquiryId())
+                .postDate(LocalDateTime.now())
                 .build());
+
+        // 최근에 삽입 한 답변 글의 id 가져오기
+        Long inquiryReplyId = inquiryReplyRepository.findRecentData();
+
+        // 답변 글이 바라보는 문의 글에 답변 글 id 넣어서 이어주기
+        inquiryRepository.updateInquiryReplyId(inquiryReplyId, newReplyReq.getInquiryId());
 
         return "CREATE SUCCESS";
     }
 
     public String update(EditInquiryReq editReq) {
-        inquiryRepository.updatePost(editReq.getInquiryId(), editReq.getTitle(), editReq.getContent());
-        return "EDIT SUCCESS";
+        int check = inquiryRepository.updatePost(editReq.getUsername(), editReq.getInquiryId(), editReq.getTitle(), editReq.getContent());
+
+        if (check == 1) {
+            return "EDIT SUCCESS";
+        } else {
+            return "EDIT FAILED : NOT MATCHED USERNAME";
+        }
     }
 
 
     public String update(EditReplyReq editReplyReq) {
-        inquiryReplyRepository.updatePost(editReplyReq.getInquiryReplyId(), editReplyReq.getContent());
-        return "EDIT SUCCESS";
+        int check = inquiryReplyRepository.updatePost(editReplyReq.getUsername(), editReplyReq.getInquiryReplyId(), editReplyReq.getContent());
+
+        if (check == 1) {
+            return "EDIT SUCCESS";
+        } else {
+            return "EDIT FAILED : NOT MATCHED USERNAME";
+        }
     }
 
     public String updateProcessing(Long inquiryId) {

@@ -18,25 +18,21 @@ public class InquiryManipulateController {
         this.inquiryManipulateService = inquiryManipulateService;
     }
 
-    // TODO: 새 문의 글 작성
     @PostMapping("/createInquiry")
     public String createInquiry(@RequestBody NewInquiryReq newInquiryReq) {
         return inquiryManipulateService.insert(newInquiryReq);
     }
 
-    // TODO: 새 답변 글 작성
     @PostMapping("/createReply")
     public String createReply(@RequestBody NewReplyReq newReplyReq) {
         return inquiryManipulateService.insert(newReplyReq);
     }
 
-    // TODO: 문의 글 수정
     @PatchMapping("/editInquiry")
     public String editInquiry(@RequestBody EditInquiryReq editInquiryReq) {
         return inquiryManipulateService.update(editInquiryReq);
     }
 
-    // TODO: 답변 글 수정
     @PatchMapping("/editReply")
     public String editReply(@RequestBody EditReplyReq editReplyReq) {
         return inquiryManipulateService.update(editReplyReq);

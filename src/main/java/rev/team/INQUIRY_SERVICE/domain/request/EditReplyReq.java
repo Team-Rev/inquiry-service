@@ -9,6 +9,8 @@ public class EditReplyReq {
 
     private Long inquiryReplyId;
 
+    private String username;
+
     private String content;
 
 }
