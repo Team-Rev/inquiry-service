@@ -50,7 +50,6 @@ public class InquiryManipulateController {
         return inquiryManipulateService.deleteReply(id);
     }
 
-    // TODO: 문의 해결 여부 변경
     @PatchMapping("/updateProcessing")
     public String updateProcessing(@RequestParam Long inquiryId) {
         return inquiryManipulateService.updateProcessing(inquiryId);

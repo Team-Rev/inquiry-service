@@ -85,21 +85,45 @@ public class InquiryManipulateService {
     // 메인 문의면 이어지는 애들 다 삭제, 서브 문의면 그것만 삭제
     public String deleteInquiry(Long id) {
 
-        int checkParentId = inquiryRepository.isParentId(id); // 메인 문의인지, 서브 문의인지 체크
+        if (inquiryRepository.existsById(id)) {
 
-        if (checkParentId == 0) { // 메인
-            List<Inquiry> deleteInquiries = inquiryRepository.findInquiryById(id);
+            boolean checkParentId = inquiryRepository.existsById(id); // 메인 문의인지, 서브 문의인지 체크
+            if (checkParentId) { // 메인
 
-            for (Inquiry inquiry : deleteInquiries) {
-                inquiryReplyRepository.delete(inquiry.getInquiryReplyId()); // 1-문의글의 답변글 삭제
-                inquiryRepository.deleteById(inquiry.getInquiryId()); // 2-문의글 삭제
+                // 삭제 할 메인 문의
+                Inquiry deleteInquiry = inquiryRepository.findMainById(id);
+
+                // 메인 문의에 연결된 답변 삭제
+                if (deleteInquiry.getInquiryReplyId() != null) {
+                    inquiryReplyRepository.delete(deleteInquiry.getInquiryReplyId());
+                }
+
+                // 메인 문의 삭제
+                inquiryRepository.deleteById(id);
+
+                // 메인 문의의 서브 문의들 삭제
+                List<Inquiry> deleteInquiries = inquiryRepository.findInquiryByParentId(id);
+
+                for (Inquiry deleteinquiry : deleteInquiries) {
+
+                    // TODO : 서브 문의에 연결된 답변 삭제 안 됨
+                    if (deleteInquiry.getInquiryReplyId() != null) {
+                        inquiryReplyRepository.delete(deleteinquiry.getInquiryReplyId()); // 1-답변 삭제
+                    }
+
+                    inquiryRepository.deleteByParentId(id); // 2-서브 문의 삭제
+                }
+
+            } else { // 서브
+                inquiryRepository.deleteById(id);
             }
 
-        } else { // 서브
-            inquiryRepository.deleteById(id);
+            return "DELETE SUCCESS";
+
+        } else {
+            return "DELETE FAILED : NOT EXISTED DATA";
         }
 
-        return "DELETE SUCCESS";
     }
 
     public String deleteReply(Long id) {
